@@ -41,6 +41,7 @@ function loadTemplate (directory, hot = false) {
 
   if (hot) {
     entry.render = function (data) {
+      this.styles = ''
       load()
       return this.template({
         styles: this.styles,

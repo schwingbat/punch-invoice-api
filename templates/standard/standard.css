@@ -7,10 +7,13 @@
 }
 
 body {
+  --header-font: "Fira Sans", sans-serif;
+  --body-font: "Fira Sans", sans-serif;
+  --label-font: "Fira Sans", sans-serif;
   /* font-size: 0.8em; */
-  font-size: 14px;
+  font-size: 15px;
   /* padding: 40px; */
-  font-family: "Helvetica Neue", "Helvetica", "Source Sans Pro", sans-serif;
+  font-family: var(--body-font);
   color: #000;
   background-color: #fff;
   -webkit-print-color-adjust: exact;
@@ -18,8 +21,10 @@ body {
 
 .header {
   text-align: center;
-  margin-bottom: 1em;
-  color: #bbb;
+  margin-bottom: 0.8em;
+  color: #ccc;
+  font-weight: bold;
+  font-family: var(--header-font);
 }
 
 .user-block {
@@ -45,7 +50,6 @@ body {
 .line-items-table {
   width: calc(100% + 2em);
   margin: 0 -1em;
-  font-size: 0.9em;
 }
 
 .line-items-table td {
@@ -57,6 +61,7 @@ body {
   border-bottom: 2px solid #000;
   font-weight: bold;
   text-transform: uppercase;
+  font-family: var(--header-font);
 }
 
 .line-items-table tbody td {
@@ -66,6 +71,7 @@ body {
 .table-label {
   font-weight: bold;
   padding-right: 1em;
+  font-family: var(--header-font);
 }
 
 /*=========================*\
@@ -116,6 +122,7 @@ body {
   height: min-content;
   margin-right: 0.1em;
   height: 20px;
+  font-family: var(--label-font);
 }
 
 .comment-object-icon {

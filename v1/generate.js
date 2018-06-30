@@ -16,17 +16,30 @@ router.post('/pdf/:template', async (req, res) => {
     .then(async browser => {
       const page = await browser.newPage()
       page.once('load', async () => {
-        const buffer = await page.pdf({
-          format: 'A4',
-          margin: {
-            top: '0.5in',
-            right: '0.5in',
-            bottom: '0.5in',
-            left: '0.5in'
-          }
-        })
-        res.send(buffer)
-        await page.close()
+        setTimeout(async () => {
+          const buffer = await page.pdf({
+            format: 'A4',
+            margin: {
+              top: '0.5in',
+              right: '0.5in',
+              bottom: '0.5in',
+              left: '0.5in'
+            },
+            displayHeaderFooter: true,
+            headerTemplate: `
+              <header>
+                <span class="pageNumber"></span> of <span class="totalPages"></span>
+              </header>
+            `,
+            footerTemplate: `
+              <footer>
+                <span class="pageNumber"></span> of <span class="totalPages"></span>
+              </footer>
+            `,
+          })
+          res.send(buffer)
+          await page.close()
+        }, 300)
       })
       await page.setContent(html)
     })
