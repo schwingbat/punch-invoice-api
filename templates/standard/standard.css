@@ -12,7 +12,7 @@ body {
   --body-font: "Fira Sans", sans-serif;
   --label-font: "Fira Sans", sans-serif;
   /* font-size: 0.8em; */
-  font-size: 14px;
+  font-size: 13px;
   /* padding: 40px; */
   font-family: var(--body-font);
   color: #000;
