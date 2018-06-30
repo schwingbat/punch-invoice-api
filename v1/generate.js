@@ -11,7 +11,7 @@ router.post('/pdf/:template', async (req, res) => {
     })
   }
 
-  const html = templates[template].render(req.body)
+  const html = templates[template].render(req.body, { debug: true })
   puppeteer.launch({ args: ['--no-sandbox', '--disable-setuid-sandbox'] })
     .then(async browser => {
       const page = await browser.newPage()
@@ -24,18 +24,7 @@ router.post('/pdf/:template', async (req, res) => {
               right: '0.5in',
               bottom: '0.5in',
               left: '0.5in'
-            },
-            displayHeaderFooter: true,
-            headerTemplate: `
-              <header>
-                <span class="pageNumber"></span> of <span class="totalPages"></span>
-              </header>
-            `,
-            footerTemplate: `
-              <footer>
-                <span class="pageNumber"></span> of <span class="totalPages"></span>
-              </footer>
-            `,
+            }
           })
           res.send(buffer)
           await page.close()

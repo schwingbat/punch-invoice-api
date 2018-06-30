@@ -18,6 +18,7 @@
     "body-parser": "^1.18.3",
     "express": "^4.16.3",
     "handlebars": "^4.0.11",
-    "puppeteer": "^1.5.0"
+    "puppeteer": "^1.5.0",
+    "urlsafe-base64": "^1.0.0"
   }
 }
