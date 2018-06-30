@@ -3,21 +3,21 @@
   "version": "1.0.0",
   "engines": {
     "node": "10.5.0",
-    "npm": "6.1.0" 
+    "npm": "6.1.0"
   },
-  "description": "This module moves the PDF invoice generation out of the main CLI and into its own API which takes a punch summary JSON object and returns a generated PDF file.",
+  "description": "Moves the PDF invoice generation out of the main CLI and into its own API which takes a punch summary JSON object and returns a generated PDF file.",
   "main": "main.js",
   "scripts": {
     "start": "node main.js",
-    "dev": "nodemon main.js"
+    "dev": "nodemon main.js --hot-templates"
   },
   "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "author": "Tony McCoy <tony@ratwizard.io>",
+  "license": "MIT",
   "dependencies": {
     "body-parser": "^1.18.3",
     "express": "^4.16.3",
     "handlebars": "^4.0.11",
-    "html-pdf": "^2.2.0"
+    "puppeteer": "^1.5.0"
   }
 }

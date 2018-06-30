@@ -7,13 +7,13 @@
 }
 
 body {
-  font-size: 0.8em;
-  border: 1px solid red;
-  margin: 24px 16px 24px 16px;
-  /* padding: 1.5em; */
-  font-family: "Source Sans Pro", sans-serif;
+  /* font-size: 0.8em; */
+  font-size: 14px;
+  /* padding: 40px; */
+  font-family: "Helvetica Neue", "Helvetica", "Source Sans Pro", sans-serif;
   color: #000;
   background-color: #fff;
+  -webkit-print-color-adjust: exact;
 }
 
 .header {
@@ -43,7 +43,9 @@ body {
 \*=========================*/
 
 .line-items-table {
-  width: 100%;
+  width: calc(100% + 2em);
+  margin: 0 -1em;
+  font-size: 0.9em;
 }
 
 .line-items-table td {
@@ -98,6 +100,47 @@ body {
   border-left: 4px solid #ccc;
 
   margin-right: 0.7em;
+}
+
+.item-comment span {
+  line-height: 22px;
+}
+
+/*=========================*\
+||     Comment Objects     ||
+\*=========================*/
+
+.comment-object {
+  display: inline-flex;
+  align-items: center;
+  height: min-content;
+  margin-right: 0.1em;
+  height: 20px;
+}
+
+.comment-object-icon {
+  width: 1em;
+  height: 1em;
+  margin: 1px 3px 2px 3px;
+}
+
+.comment-object-label {
+  font-size: 0.7em;
+  font-weight: bold;
+}
+
+.comment-object.vsts {
+  /* background-color: #0078d7; */
+  border: 1px solid #0078d7;
+  color: #0078d7;
+}
+
+.comment-object.vsts {
+  fill: #0078d7;
+}
+
+.comment-object.vsts .comment-object-label {
+  padding: 0 0.2em;
 }
 
 /*=========================*\

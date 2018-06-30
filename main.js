@@ -10,4 +10,7 @@ app.use('/v1', require('./v1'))
 
 app.listen(PORT, () => {
   console.log(`Punch Invoice API running on port ${PORT}`)
+  if (process.argv.includes('--hot-templates')) {
+    console.log('Templates are HOT')
+  }
 })
