@@ -1,11 +1,15 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>{{ project.name }} Invoice</title>
-    <link href="https://fonts.googleapis.com/css?family=Fira+Sans:300,600" rel="stylesheet">
+    <title>{{project.name}} Invoice</title>
+    {{!-- <link href="https://fonts.googleapis.com/css?family=Fira+Sans:300,600" rel="stylesheet"> --}}
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700" rel="stylesheet">
     <style>
       {{{styles}}}
     </style>
+    <script>
+      window.templateData = {{{json days}}}
+    </script>
   </head>
   <body>
     <h1 class="header">INVOICE</h1>
@@ -48,6 +52,8 @@
       </div>
     </div>
 
+    <div id="charts"></div>
+
     <table class="line-items-table" cellspacing="0">
       <thead>
         <tr>
@@ -67,12 +73,12 @@
               <ul class="item-comments-list">
                 {{#each comments}}
                   <li class="item-comment">
-                    <span>
+                    {{!-- <span> --}}
                       {{#each objects}}
-                        {{{object-label key value}}}
+                        {{{object-label key value config}}}
                       {{/each}}
                       {{comment}}
-                    </span>
+                    {{!-- </span> --}}
                   </li>
                 {{/each}}
               </ul>
@@ -94,5 +100,9 @@
         </tr>
       </table>
     </div>
+
+    {{#if scripts}}
+      {{{scripts}}}
+    {{/if}}
   </body>
 </html>

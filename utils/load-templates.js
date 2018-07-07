@@ -39,6 +39,7 @@ function loadTemplate (directory, hot = false) {
   const entry = {
     template: null,
     styles: '',
+    scripts: '',
     resources: directory,
     render: function (data) {
       return this.template({
@@ -63,15 +64,25 @@ function loadTemplate (directory, hot = false) {
       })
     }
 
+    if (manifest.js) {
+      manifest.js.forEach(file => {
+        entry.scripts += '<script>\n'
+        entry.scripts += fs.readFileSync(path.join(directory, file), 'utf8')
+        entry.scripts += '</script>\n'
+      })
+    }
+
     entry.template = handlebars.compile(fs.readFileSync(path.join(directory, manifest.template), 'utf8'))
   }
 
   if (hot) {
     entry.render = function (data, opts = {}) {
       this.styles = ''
+      this.scripts = ''
       load()
       const rendered = this.template({
         styles: this.styles,
+        scripts: this.scripts,
         ...data
       })
       if (opts.debug) {
@@ -94,12 +105,16 @@ const objectLabels = {
   vsts: loadTemplate(path.join(templatesPath, '_objects', 'vsts'), hotTemplates)
 }
 
-handlebars.registerHelper('object-label', function (key, value) {
+handlebars.registerHelper('object-label', function (key, value, config = {}) {
   if (!objectLabels[key]) {
-    return objectLabels.generic.render({ key, value })
+    return objectLabels.generic.render({ key, value, config })
   } else {
-    return objectLabels[key].render({ key, value })
+    return objectLabels[key].render({ key, value, config })
   }
+})
+
+handlebars.registerHelper('json', function (object, pretty = false) {
+  return JSON.stringify(object, null, pretty ? 2 : null)
 })
 
 module.exports = function () {

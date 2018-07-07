@@ -8,11 +8,12 @@
 }
 
 body {
-  --header-font: "Fira Sans", sans-serif;
-  --body-font: "Fira Sans", sans-serif;
-  --label-font: "Fira Sans", sans-serif;
+  --header-font: "Benton Sans", sans-serif;
+  --body-font: "Benton Sans", sans-serif;
+  --label-font: "Benton Sans", sans-serif;
   /* font-size: 0.8em; */
-  font-size: 13px;
+  font-size: 14px;
+  font-weight: 400;
   /* padding: 40px; */
   font-family: var(--body-font);
   color: #000;
@@ -21,10 +22,12 @@ body {
 }
 
 .header {
-  text-align: center;
+  /* text-align: center; */
   margin-bottom: 0.8em;
-  color: #ccc;
-  font-weight: bold;
+  color: #e46f6f;
+  font-weight: 300;
+  font-size: 2.5em;
+  letter-spacing: -0.05em;
   font-family: var(--header-font);
 }
 
@@ -60,7 +63,8 @@ body {
 
 .line-items-table thead td {
   border-bottom: 2px solid #000;
-  font-weight: bold;
+  font-weight: 700;
+  letter-spacing: -0.02em;
   text-transform: uppercase;
   font-family: var(--header-font);
 }
@@ -71,7 +75,8 @@ body {
 
 .table-label {
   font-weight: bold;
-  padding-right: 1em;
+  padding-right: 0.7em;
+  letter-spacing: -0.02em;
   font-family: var(--header-font);
 }
 
@@ -121,25 +126,25 @@ body {
   display: inline-flex;
   align-items: center;
   height: min-content;
-  margin-right: 0.1em;
+  margin-right: 0.3em;
   height: 20px;
   font-family: var(--label-font);
+  text-decoration: none;
 }
 
 .comment-object-icon {
   width: 1em;
   height: 1em;
-  margin: 1px 3px 2px 3px;
+  margin: 1px 3px 2px 0;
 }
 
 .comment-object-label {
-  font-size: 0.7em;
-  font-weight: bold;
+  font-size: 0.8em;
+  font-weight: 700;
+  letter-spacing: -0.01em;
 }
 
 .comment-object.vsts {
-  /* background-color: #0078d7; */
-  border: 1px solid #0078d7;
   color: #0078d7;
 }
 
