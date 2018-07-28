@@ -15,10 +15,15 @@
   "author": "Tony McCoy <tony@ratwizard.io>",
   "license": "MIT",
   "dependencies": {
+    "@schwingbat/mon": "^1.0.0",
     "body-parser": "^1.18.3",
     "express": "^4.16.3",
+    "fs-extra": "^7.0.0",
     "handlebars": "^4.0.11",
     "puppeteer": "^1.5.0",
     "urlsafe-base64": "^1.0.0"
+  },
+  "devDependencies": {
+    "nodemon": "^1.18.3"
   }
 }

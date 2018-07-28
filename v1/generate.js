@@ -2,7 +2,7 @@ const router = require('express').Router()
 const templates = require('../utils/load-templates')()
 const puppeteer = require('puppeteer')
 
-router.post('/pdf/:template', async (req, res) => {
+router.post('/PDF/:template', async (req, res) => {
   const template = req.params.template.toLowerCase()
 
   if (!templates[template]) {

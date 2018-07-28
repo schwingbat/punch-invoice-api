@@ -1,0 +1,5 @@
+template "standard.hbs"
+css ["standard.css"]
+fonts [
+  "fonts/neuehaas"
+]

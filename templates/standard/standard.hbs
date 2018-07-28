@@ -3,7 +3,7 @@
   <head>
     <title>{{project.name}} Invoice</title>
     {{!-- <link href="https://fonts.googleapis.com/css?family=Fira+Sans:300,600" rel="stylesheet"> --}}
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Open+Sans:400,700" rel="stylesheet">
     <style>
       {{{styles}}}
     </style>
@@ -15,8 +15,7 @@
     <h1 class="header">INVOICE</h1>
     <div class="user-block">
       <div>{{user.name}}</div>
-      <div>{{user.address.street}}</div>
-      <div>{{user.address.city}}, {{user.address.state}} {{user.address.zip}}</div>
+      <div>{{{format-address user.address}}}</div>
     </div>
 
     <div class="client-block">
@@ -27,8 +26,7 @@
             <td>
               <div>{{client.contact}}</div>
               <div>{{client.company}}</div>
-              <div>{{client.address.street}}</div>
-              <div>{{client.address.city}}, {{client.address.state}} {{client.address.zip}}</div>
+              <div>{{{format-address client.address}}}</div>
             </td>
           </tr>
         </table>

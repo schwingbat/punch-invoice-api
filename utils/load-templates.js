@@ -4,13 +4,14 @@
   Compiles the template with data and returns an HTML string
 */
 
-const fs = require('fs')
+const fs = require('fs-extra')
 const path = require('path')
 const handlebars = require('handlebars')
-const usb64 = require('urlsafe-base64')
+// const usb64 = require('urlsafe-base64')
 const templatesPath = path.join(__dirname, '..', 'templates')
+const MON = require('@schwingbat/mon')
 
-function makeFontFace (font, templateDir) {
+function makeFontFace (font, fontDir) {
   let out = '@font-face {\n'
 
   out += `  font-family: "${font.name}";\n`
@@ -18,7 +19,7 @@ function makeFontFace (font, templateDir) {
   if (font.style) { out += `  font-style: ${font.style};\n` }
 
   out += `  src: `
-  const paths = ((font.path) ? [font.path] : font.paths).map(p => path.join(templateDir, p))
+  const paths = ((font.path) ? [font.path] : font.paths).map(p => path.join(fontDir, p))
   paths.forEach((fontPath, i) => {
     const format = path.extname(fontPath).toLowerCase().slice(1)
     const encoded = `data:application/x-font-${format};charset=utf-8;base64,${fs.readFileSync(fontPath).toString('base64')}`
@@ -50,11 +51,21 @@ function loadTemplate (directory, hot = false) {
   }
 
   const load = function () {
-    const manifest = require(path.join(directory, 'template.json'))
+    let manifest
+    if (fs.existsSync(path.join(directory, 'template.mon'))) {
+      manifest = MON.parse(fs.readFileSync(path.join(directory, 'template.mon'), 'utf8'))
+    } else {
+      manifest = require(path.join(directory, 'template.json'))
+    }
 
     if (manifest.fonts) {
       manifest.fonts.forEach(font => {
-        entry.styles += makeFontFace(font, directory)
+        const fontPath = path.join(directory, font, 'font-face.mon')
+        const fonts = MON.parse(fs.readFileSync(fontPath, 'utf8'))['font-face']
+        fonts.forEach(f => {
+          entry.styles += makeFontFace(f, path.dirname(fontPath))
+        })
+        // entry.styles += makeFontFace(font, directory)
       })
     }
 
@@ -86,6 +97,7 @@ function loadTemplate (directory, hot = false) {
         ...data
       })
       if (opts.debug) {
+        fs.ensureDirSync(path.join(__dirname, '../temp'))
         fs.writeFileSync(path.join(__dirname, '../temp/debug.css'), this.styles)
         fs.writeFileSync(path.join(__dirname, '../temp/debug.html'), rendered)
       }
@@ -104,6 +116,18 @@ const objectLabels = {
   generic: loadTemplate(path.join(templatesPath, '_objects', 'generic'), hotTemplates),
   vsts: loadTemplate(path.join(templatesPath, '_objects', 'vsts'), hotTemplates)
 }
+
+handlebars.registerHelper('format-address', function (val) {
+  let out = ''
+  
+  if (typeof val === 'object') {
+    out = `${val.street}\n${val.city}, ${val.state} ${val.zip}`
+  } else if (typeof val === 'string') {
+    out = val
+  }
+
+  return out.replace('\n', '<br>')
+})
 
 handlebars.registerHelper('object-label', function (key, value, config = {}) {
   if (!objectLabels[key]) {

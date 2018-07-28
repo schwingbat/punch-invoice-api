@@ -8,9 +8,9 @@
 }
 
 body {
-  --header-font: "Benton Sans", sans-serif;
-  --body-font: "Benton Sans", sans-serif;
-  --label-font: "Benton Sans", sans-serif;
+  --header-font: "Source Sans Pro", sans-serif;
+  --body-font: "Source Sans Pro", sans-serif;
+  --label-font: "Source Sans Pro", sans-serif;
   /* font-size: 0.8em; */
   font-size: 14px;
   font-weight: 400;
@@ -19,16 +19,18 @@ body {
   color: #000;
   background-color: #fff;
   -webkit-print-color-adjust: exact;
+  /* word-spacing: 0.13em; */
+  /* letter-spacing: 0.005em; */
 }
 
 .header {
   /* text-align: center; */
   margin-bottom: 0.8em;
-  color: #e46f6f;
-  font-weight: 300;
+  color: #ccc;
+  font-weight: bold;
   font-size: 2.5em;
-  letter-spacing: -0.05em;
   font-family: var(--header-font);
+  text-align: center;
 }
 
 .user-block {
