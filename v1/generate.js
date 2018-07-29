@@ -2,7 +2,7 @@ const router = require('express').Router()
 const templates = require('../utils/load-templates')()
 const puppeteer = require('puppeteer')
 
-router.post('/PDF/:template', async (req, res) => {
+router.post('/pdf/:template', async (req, res) => {
   const template = req.params.template.toLowerCase()
 
   if (!templates[template]) {
@@ -35,6 +35,19 @@ router.post('/PDF/:template', async (req, res) => {
     .catch(err => {
       console.error(err)
     })
+})
+
+router.post('/html/:template', async (req, res) => {
+  const template = req.params.template.toLowerCase()
+
+  if (!templates[template]) {
+    return res.status(400).json({
+      error: `${template} is not a supported template`
+    })
+  }
+
+  const html = templates[template].render(req.body, { debug: true })
+  res.send(html)
 })
 
 module.exports = router
